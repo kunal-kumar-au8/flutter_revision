@@ -15,11 +15,10 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
-  void initState(){
+  void initState() {
     super.initState();
   }
 
-  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -44,34 +43,40 @@ class MyWidget extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<MyWidget> {
-  String _name = 'Kunal';
-  void _intro(){
-    setState((){
-      _name = "Welcome to Flutter!";
-    });
+  final TextEditingController _nameController = TextEditingController(); 
+  var name = 'Kunal';
+  void _intro() {
+    name = _nameController.text;
+    setState(() {});
   }
-  
-  
+
   @override
-  void initState(){
+  void initState() {
     super.initState();
   }
-  
-  @override
+
+  @override 
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Text(
-      'Hello, $_name',
-      style: Theme.of(context).textTheme.headline4,
-    ),
-        ElevatedButton(
-          onPressed: _intro,
-          child: const Text("Click me")
-        )
-      ]
+    return SizedBox(
+      width: 400,
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              'Hello, $name 😊',
+              style: Theme.of(context).textTheme.headline4,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: TextField(
+                controller: _nameController,
+                keyboardType: TextInputType.text,
+                decoration: const InputDecoration(labelText: "Name",hintText: "Enter Your name",border: OutlineInputBorder()),
+              ),
+            ),
+            ElevatedButton(onPressed: _intro, child: const Text("Click me"))
+          ]),
     );
   }
 }
